@@ -34,7 +34,7 @@ class LarabannerServiceProvider extends ServiceProvider
         // Register blade directive
         Blade::directive('banner', function ($expression) {
             return "<?php
-                \$banner = \\Yourusername\\Larabanner\\Models\\SiteBanner::find($expression);
+                \$banner = \\effina\\Larabanner\\Models\\Larabanner::find($expression);
                 if (\$banner && \$banner->isDisplayable()) {
                     echo \$banner->contents;
                 }

@@ -102,6 +102,6 @@ class Larabanner extends Model
      */
     protected static function newFactory()
     {
-        return \Yourusername\Larabanner\Database\Factories\SiteBannerFactory::new();
+        return \effina\Larabanner\Database\Factories\LarabannerFactory::new();
     }
 }

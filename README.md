@@ -15,7 +15,7 @@ A simple, flexible banner management system for Laravel 11+.
 You can install the package via composer:
 
 ```bash
-composer require yourusername/larabanner
+composer require effina/larabanner
 ```
 
 ## Configuration
@@ -23,7 +23,7 @@ composer require yourusername/larabanner
 Publish the configuration file:
 
 ```bash
-php artisan vendor:publish --provider="Yourusername\Larabanner\LarabannerServiceProvider" --tag="config"
+php artisan vendor:publish --provider="effina\Larabanner\LarabannerServiceProvider" --tag="config"
 ```
 
 Run the migrations:

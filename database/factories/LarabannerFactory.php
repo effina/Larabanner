@@ -1,6 +1,6 @@
 <?php
 
-namespace Yourusername\Larabanner\Database\Factories;
+namespace effina\Larabanner\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use effina\Larabanner\Models\Larabanner;

@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('site_banners', function (Blueprint $table) {
+        Schema::create('larabanners', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->longText('contents');
@@ -22,6 +22,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('site_banners');
+        Schema::dropIfExists('larabanners');
     }
 };

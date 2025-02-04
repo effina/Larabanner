@@ -1,4 +1,3 @@
-// config/larabanner.php
 <?php
 
 return [
@@ -61,3 +60,4 @@ return [
         'styles' => 'styles',       // Additional styles section
     ],
 ];
+

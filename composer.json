@@ -19,18 +19,18 @@
   },
   "autoload": {
     "psr-4": {
-      "Yourusername\\Larabanner\\": "src/"
+      "effina\\Larabanner\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Yourusername\\Larabanner\\Tests\\": "tests/"
+      "effina\\Larabanner\\Tests\\": "tests/"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "Yourusername\\Larabanner\\LarabannerServiceProvider"
+        "effina\\Larabanner\\LarabannerServiceProvider"
       ]
     }
   },

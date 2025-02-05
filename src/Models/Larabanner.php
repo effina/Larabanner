@@ -24,6 +24,10 @@ class Larabanner extends Model
         'display_stop_date',
     ];
 
+    protected $casts = [
+	'display_days' => 'array',
+    ];
+
     /**
      * The attributes that should be cast.
      *

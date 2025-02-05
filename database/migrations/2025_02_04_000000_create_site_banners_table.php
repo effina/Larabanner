@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->longText('contents');
-            $table->set('display_days', ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'])->nullable();
+            $table->json('display_days')->nullable();
             $table->timestamp('display_start_date');
             $table->timestamp('display_stop_date')->nullable();
             $table->timestamps();
@@ -25,3 +25,4 @@ return new class extends Migration
         Schema::dropIfExists('larabanners');
     }
 };
+

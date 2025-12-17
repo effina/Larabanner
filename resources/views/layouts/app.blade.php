@@ -1,4 +1,3 @@
-// resources/views/layouts/app.blade.php
 @if(config('larabanner.layout'))
     @extends(config('larabanner.layout'))
 

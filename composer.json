@@ -1,7 +1,7 @@
 {
   "name": "effina/larabanner",
   "description": "A simple banner management system for Laravel",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "type": "library",
   "license": "MIT",
   "authors": [

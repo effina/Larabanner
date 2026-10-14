@@ -5,6 +5,7 @@ namespace effina\Larabanner\Tests\Feature;
 use effina\Larabanner\Tests\TestCase;
 use effina\Larabanner\Models\Larabanner;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\View;
 use PHPUnit\Framework\Attributes\Test;
 
 class LarabannerControllerTest extends TestCase
@@ -107,5 +108,20 @@ class LarabannerControllerTest extends TestCase
         $response->assertStatus(200);
         $response->assertViewHas('banner');
         $response->assertSee('Test content');
+    }
+
+    #[Test]
+    public function it_renders_inside_a_custom_layout()
+    {
+        View::addLocation(__DIR__ . '/../fixtures/views');
+        config()->set('larabanner.layout', 'custom-layout');
+
+        $banner = Larabanner::factory()->create();
+
+        $response = $this->get(route('larabanner.index'));
+
+        $response->assertStatus(200);
+        $response->assertSee('<main id="custom-layout">', false);
+        $response->assertSee($banner->name);
     }
 }

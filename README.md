@@ -1,6 +1,6 @@
 # Larabanner
 
-A simple, flexible banner management system for Laravel 11+.
+A simple, flexible banner management system for Laravel 11, 12, and 13.
 
 ## Features
 

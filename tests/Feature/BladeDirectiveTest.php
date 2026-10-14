@@ -5,13 +5,14 @@ namespace effina\Larabanner\Tests\Feature;
 use effina\Larabanner\Tests\TestCase;
 use effina\Larabanner\Models\Larabanner;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Illuminate\Support\Facades\Blade;
 
 class BladeDirectiveTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function it_can_render_active_banner()
     {
         $banner = Larabanner::factory()->create([
@@ -24,7 +25,7 @@ class BladeDirectiveTest extends TestCase
         $this->assertStringContainsString('Test Banner Content', $rendered);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_render_inactive_banner()
     {
         $banner = Larabanner::factory()->create([
@@ -37,7 +38,7 @@ class BladeDirectiveTest extends TestCase
         $this->assertStringNotContainsString('Future Banner Content', $rendered);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_render_nonexistent_banner()
     {
         $rendered = Blade::render('@banner(999)');
@@ -45,7 +46,7 @@ class BladeDirectiveTest extends TestCase
         $this->assertEmpty(trim($rendered));
     }
 
-    /** @test */
+    #[Test]
     public function it_respects_display_days()
     {
         $currentDay = strtolower(date('D'));
@@ -62,7 +63,7 @@ class BladeDirectiveTest extends TestCase
         $this->assertStringNotContainsString('Day Specific Content', $rendered);
     }
 
-    /** @test */
+    #[Test]
     public function it_handles_html_content_safely()
     {
         $banner = Larabanner::factory()->create([

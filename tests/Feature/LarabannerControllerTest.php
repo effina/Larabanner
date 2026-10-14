@@ -5,12 +5,13 @@ namespace effina\Larabanner\Tests\Feature;
 use effina\Larabanner\Tests\TestCase;
 use effina\Larabanner\Models\Larabanner;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 
 class LarabannerControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function it_can_display_index_page()
     {
         $banner = Larabanner::factory()->create();
@@ -22,7 +23,7 @@ class LarabannerControllerTest extends TestCase
         $response->assertSee($banner->name);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_display_create_page()
     {
         $response = $this->get(route('larabanner.create'));
@@ -30,7 +31,7 @@ class LarabannerControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_create_banner()
     {
         $bannerData = [
@@ -46,7 +47,7 @@ class LarabannerControllerTest extends TestCase
         $this->assertDatabaseHas('larabanners', ['name' => 'Test Banner']);
     }
 
-    /** @test */
+    #[Test]
     public function it_validates_required_fields_on_create()
     {
         $response = $this->post(route('larabanner.store'), []);
@@ -54,7 +55,7 @@ class LarabannerControllerTest extends TestCase
         $response->assertSessionHasErrors(['name', 'contents', 'display_start_date']);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_display_edit_page()
     {
         $banner = Larabanner::factory()->create();
@@ -66,7 +67,7 @@ class LarabannerControllerTest extends TestCase
         $response->assertSee($banner->name);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_update_banner()
     {
         $banner = Larabanner::factory()->create();
@@ -83,7 +84,7 @@ class LarabannerControllerTest extends TestCase
         $this->assertDatabaseHas('larabanners', ['name' => 'Updated Banner']);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_delete_banner()
     {
         $banner = Larabanner::factory()->create();
@@ -94,7 +95,7 @@ class LarabannerControllerTest extends TestCase
         $this->assertSoftDeleted($banner);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_display_show_page()
     {
         $banner = Larabanner::factory()->create([

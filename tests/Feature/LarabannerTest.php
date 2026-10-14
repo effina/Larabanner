@@ -5,12 +5,13 @@ namespace effina\Larabanner\Tests\Unit;
 use effina\Larabanner\Tests\TestCase;
 use effina\Larabanner\Models\Larabanner;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 
 class LarabannerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function it_determines_if_banner_is_displayable_based_on_dates()
     {
         $banner = Larabanner::factory()->create([
@@ -34,7 +35,7 @@ class LarabannerTest extends TestCase
         $this->assertFalse($futureBanner->isDisplayable());
     }
 
-    /** @test */
+    #[Test]
     public function it_determines_if_banner_is_displayable_based_on_days()
     {
         $currentDay = strtolower(date('D'));
@@ -53,7 +54,7 @@ class LarabannerTest extends TestCase
         $this->assertFalse($banner->isDisplayable());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_remaining_time()
     {
         $banner = Larabanner::factory()->create([
@@ -78,7 +79,7 @@ class LarabannerTest extends TestCase
         $this->assertNull($neverEndingBanner->getRemainingTime());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_scope_active_banners()
     {
         Larabanner::factory()->create([

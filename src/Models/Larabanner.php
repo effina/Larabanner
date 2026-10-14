@@ -63,6 +63,25 @@ class Larabanner extends Model
     }
 
     /**
+     * Render the contents of the given banner, or of every active banner
+     * when no ID is given, skipping any that should not display right now.
+     *
+     * @param  int|null  $id
+     * @return string
+     */
+    public static function renderDisplayable(?int $id = null): string
+    {
+        $banners = $id === null
+            ? static::active()->get()
+            : static::whereKey($id)->get();
+
+        return $banners
+            ->filter(fn (self $banner) => $banner->isDisplayable())
+            ->pluck('contents')
+            ->implode('');
+    }
+
+    /**
      * Get the banner's remaining display time.
      *
      * @return string|null

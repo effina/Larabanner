@@ -2,6 +2,7 @@
 
 namespace effina\Larabanner;
 
+use effina\Larabanner\Models\Larabanner;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 
@@ -32,16 +33,10 @@ class LarabannerServiceProvider extends ServiceProvider
         ], 'views');
 
         // Register blade directive
-        Blade::directive('banner', function () {
-            return "<?php
-                \$banners = \\effina\\Larabanner\\Models\\Larabanner::all();
-                
-                foreach (\$banners as \$banner) {
-                    if (\$banner && \$banner->isDisplayable()) {
-                        echo \$banner->contents;
-                    }                
-                }
-            ?>";
+        Blade::directive('banner', function ($expression) {
+            $model = '\\' . Larabanner::class;
+
+            return "<?php echo {$model}::renderDisplayable({$expression}); ?>";
         });
     }
 

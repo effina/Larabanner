@@ -78,4 +78,80 @@ class BladeDirectiveTest extends TestCase
         $this->assertStringContainsString('<script>alert("xss")</script>', $rendered);
         $this->assertStringContainsString('<div>Safe Content</div>', $rendered);
     }
+
+    #[Test]
+    public function it_renders_only_the_requested_banner()
+    {
+        $requested = Larabanner::factory()->create([
+            'display_start_date' => now()->subDay(),
+            'display_days' => null,
+            'contents' => '<div>Requested Banner</div>'
+        ]);
+
+        Larabanner::factory()->create([
+            'display_start_date' => now()->subDay(),
+            'display_days' => null,
+            'contents' => '<div>Other Banner</div>'
+        ]);
+
+        $rendered = Blade::render('@banner(' . $requested->id . ')');
+
+        $this->assertStringContainsString('Requested Banner', $rendered);
+        $this->assertStringNotContainsString('Other Banner', $rendered);
+    }
+
+    #[Test]
+    public function it_renders_all_active_banners_without_an_id()
+    {
+        Larabanner::factory()->create([
+            'display_start_date' => now()->subDay(),
+            'display_days' => null,
+            'contents' => '<div>First Banner</div>'
+        ]);
+
+        Larabanner::factory()->create([
+            'display_start_date' => now()->subDay(),
+            'display_days' => null,
+            'contents' => '<div>Second Banner</div>'
+        ]);
+
+        Larabanner::factory()->create([
+            'display_start_date' => now()->addDay(),
+            'display_days' => null,
+            'contents' => '<div>Future Banner</div>'
+        ]);
+
+        $rendered = Blade::render('@banner');
+
+        $this->assertStringContainsString('First Banner', $rendered);
+        $this->assertStringContainsString('Second Banner', $rendered);
+        $this->assertStringNotContainsString('Future Banner', $rendered);
+    }
+
+    #[Test]
+    public function it_accepts_a_variable_as_the_banner_id()
+    {
+        $banner = Larabanner::factory()->create([
+            'display_start_date' => now()->subDay(),
+            'display_days' => null,
+            'contents' => '<div>Variable Banner</div>'
+        ]);
+
+        $rendered = Blade::render('@banner($bannerId)', ['bannerId' => $banner->id]);
+
+        $this->assertStringContainsString('Variable Banner', $rendered);
+    }
+
+    #[Test]
+    public function it_does_not_overwrite_view_variables()
+    {
+        Larabanner::factory()->create([
+            'display_start_date' => now()->subDay(),
+            'display_days' => null,
+        ]);
+
+        $rendered = Blade::render('@banner {{ $banner }}', ['banner' => 'original value']);
+
+        $this->assertStringContainsString('original value', $rendered);
+    }
 }

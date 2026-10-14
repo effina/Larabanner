@@ -17,6 +17,7 @@ class BladeDirectiveTest extends TestCase
     {
         $banner = Larabanner::factory()->create([
             'display_start_date' => now()->subDay(),
+            'display_days' => null,
             'contents' => '<div>Test Banner Content</div>'
         ]);
 
@@ -68,6 +69,7 @@ class BladeDirectiveTest extends TestCase
     {
         $banner = Larabanner::factory()->create([
             'display_start_date' => now()->subDay(),
+            'display_days' => null,
             'contents' => '<script>alert("xss")</script><div>Safe Content</div>'
         ]);
 
